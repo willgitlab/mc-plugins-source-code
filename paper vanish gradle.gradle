@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.bukkit:bukkit:1.20.1-R0.1-SNAPSHOT'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Plugin-Main': 'com.example.vanish.VanishPlugin',
+            'Plugin-Description': 'A simple vanish plugin for Minecraft',
+            'Plugin-Version': '1.0',
+            'Built-By': System.getProperty('user.name')
+        )
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+repositories {
+    maven {
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
+}
